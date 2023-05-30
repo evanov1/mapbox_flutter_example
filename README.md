@@ -1,24 +1,16 @@
-# mapbox_flutter_example
+# mapbox_example
 
 A new Flutter project.
 
-## Mapxbox example
+## Getting Started
 
-This application supposed to a be an implementation example of mapbox with mapbox_gl.
+This project is a starting point for a Flutter application.
 
-This application should show a mapbox map with wome features:
-- marker
-- polylines
-- button which allows us to zoom to a certain coordinate.
+A few resources to get you started if this is your first Flutter project:
 
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-## Mapbox token
-
-Default public token:
-pk.eyJ1IjoiZXZhbm92MSIsImEiOiJjbGhpczI5NnYwYXhnM2VtdThmeTJpOWo3In0.G9ZugLyobYU8uE7Er5cADw
-
-Secret Token
-sk.eyJ1IjoiZXZhbm92MSIsImEiOiJjbGkxZTBnc2IwMGo3M2xtbHpqMmhyNXpuIn0.BOgLo0gooxOFnEt6jnaRPA
-
-
-If you need an other token with other permissions, ask me please
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
