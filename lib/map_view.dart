@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
@@ -32,17 +33,20 @@ class _MapViewState extends State<MapView> {
         setState(() {
           marker = value;
         });
-        LatLng latlong= LatLng(37.0902, 95.7129);
-        addMarker(markerKey: "key", markerImage: marker, latlong: latlong)
-            .then((value) {
-          getCurrentLocation().then((current) {
-            createPolyline(
-                polylineSource: LatLng(current.latitude!, current.longitude!),
-                polylineDestination:
-                LatLng(latlong.latitude, latlong.longitude),
-                navType: "driving");
+        if(Platform.isIOS){
+          LatLng latlong= LatLng(37.0902, 95.7129);
+          addMarker(markerKey: "key", markerImage: marker, latlong: latlong)
+              .then((value) {
+            getCurrentLocation().then((current) {
+              createPolyline(
+                  polylineSource: LatLng(current.latitude!, current.longitude!),
+                  polylineDestination:
+                  LatLng(latlong.latitude, latlong.longitude),
+                  navType: "driving");
+            });
           });
-        });
+        }
+
       });
 
     } catch (e) {
@@ -142,6 +146,18 @@ class _MapViewState extends State<MapView> {
   addSourceAndLineLayer(geo) async {
     // Create a polyLine between source and destination
 
+
+    if(Platform.isAndroid) {
+
+      await mapController!.removeSource("fills");
+      await mapController!.removeLayer("lines");
+      await mapController!.removeSource("fills");
+      await mapController!.removeLayer("lines");
+
+    }
+
+
+
     var _fills = {
       "type": "FeatureCollection",
       "features": [
@@ -221,7 +237,21 @@ class _MapViewState extends State<MapView> {
         ),
         myLocationEnabled: true,
         myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
+        onMapLongClick: (point, latlong) {
+          if(Platform.isAndroid){
+            addMarker(markerKey: "key", markerImage: marker, latlong: latlong)
+                .then((value) {
+              getCurrentLocation().then((current) {
+                createPolyline(
+                    polylineSource: LatLng(current.latitude!, current.longitude!),
+                    polylineDestination:
+                    LatLng(latlong.latitude, latlong.longitude),
+                    navType: "driving");
+              });
+            });
+          }
 
+        },
       ),
       floatingActionButton: FloatingActionButton(
         child: Text("Zoom"),
